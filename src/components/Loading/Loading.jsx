@@ -61,7 +61,7 @@ const Loading = () => {
                     </AnimatePresence>
                 )
             })()}
-            {showTransitions && <Transitions />}
+            {showTransitions && <Transitions  />}
         </motion.div>
     );
 };
@@ -73,6 +73,7 @@ const styles = {
         height: "100vh",
         backgroundColor: "white",
         overflow: "hidden",
+        zIndex: 100,
     },
 
     content: {

@@ -1,17 +1,26 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect, createContext } from 'react'
 import './App.css'
 import Loading from './components/Loading/Loading'
+import Control from './components/Control'
 
+const LoadingContext = createContext()
 const App = () => {
-
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    setLoading(true)
+  }, [])
   return (
     <>
-      <Loading />
+      {(loading ?
+        <LoadingContext.Provider value={{loading, setLoading}}>
+          <Loading />
+        </LoadingContext.Provider> :
+        <Control />
+      )}
     </>
   );
 };
 
 
 export default App
+export { LoadingContext }

@@ -1,20 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { LoadingContext } from '../../App';
 
 const Transitions = () => {
-    const styles = {
-        container: {
-            position: "absolute",
-            top: 0,
-            width: "20%",
-            height: "100%",
-            backgroundColor: "black",
-            borderTopLeftRadius: "9vw",
-            borderTopRightRadius: "9vw",
-        },
-    };
     const duration_var = 1.3;
     const left_var = 14.2857142857;
+    const { loading, setLoading } = useContext(LoadingContext);
+    setTimeout(() => setLoading(false), duration_var * 1000 + 300);
     return (
         <div className='overflow-hidden w-full h-screen absolute top-0 left-0'>
             <motion.div
@@ -59,8 +51,20 @@ const Transitions = () => {
                 animate={{ transform: "translateY(-100vh)" }}
                 transition={{ duration: duration_var, delay: 0.3 }}
             />
+
         </div>
     )
 }
+const styles = {
+    container: {
+        position: "absolute",
+        top: 0,
+        width: "20%",
+        height: "100%",
+        backgroundColor: "black",
+        borderTopLeftRadius: "9vw",
+        borderTopRightRadius: "9vw",
+    },
+};
 
 export default Transitions
