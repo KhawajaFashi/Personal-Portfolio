@@ -11,12 +11,13 @@ const App = () => {
   }, [])
   return (
     <>
-      {(loading ?
+      {/* {(loading ?
         <LoadingContext.Provider value={{loading, setLoading}}>
           <Loading />
         </LoadingContext.Provider> :
         <Control />
-      )}
+        )} */}
+        <Control />
     </>
   );
 };
