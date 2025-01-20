@@ -1,93 +1,115 @@
-import React from 'react'
-import { createBrowserRouter, NavLink } from 'react-router-dom'
-import Home from './Home'
-import KF_logo from '../../assets/KF_logo.jpg'
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import KF_logo from "../../assets/KF_logo.jpg";
 import { IconContext } from "react-icons";
 import { IoFolderOpen } from "react-icons/io5";
 
-
 const NavBar = () => {
-    // const router = createBrowserRouter(
-    //     [
-    //         {
-    //             path: '/',
-    //             component: <Home/>,
-    //         },
-    //         {
-    //             path: '/about',
-    //             component: About,
-    //         },
-    //         {
-    //             path: '/skills',
-    //             component: Skills,
-    //         },
-    //         {
-    //             path: '/projects',
-    //             component: Projects,
-    //         },
-    //         {
-    //             path: '/contact',
-    //             component: Contact,
-    //         },
-    //     ]
-    // )
+    const [showLinks, setShowLinks] = useState(false);
+    const [isRotated, setIsRotated] = useState(false);
+
+    const links = [
+        { name: "Home" },
+        { name: "About" },
+        { name: "Skills" },
+        { name: "Projects" },
+        { name: "Contact" },
+    ];
+
+    const linkVariants = {
+        hidden: { opacity: 0, y: -50 },
+        visible: () => ({
+            opacity: 1,
+            y: 0,
+            transition: { type: "tween", duration: 0.5 },
+        }),
+        exit: { y: -50, opacity: 0, duration: 0.7 }
+    };
+    let handleClick = function () {
+        setIsRotated((prev) => !prev);
+        let interval = setTimeout(() => {
+            setShowLinks((prev) => !prev);
+        }, 500);
+        return () => clearInterval(interval);
+    }
 
     return (
-        <div className='flex justify-start items-start h-24 absolute top-0 left-0 w-full overflow-hidden p-4'>
-            <ul className='flex justify-between items-center w-full h-full overflow-hidden'>
-                <li className='' >
-                    {/* <NavLink to="/"></NavLink> */}
-                    <img src={KF_logo} alt="Logo" className='h-full flex justify-start items-start' style={{
-                        width: "100px",
-                    }} />
-                </li>
+        <div className="flex justify-start items-start h-24 absolute top-0 left-0 w-full p-4">
+            <ul className="flex justify-between items-center w-full h-full">
+                {/* Logo */}
                 <li>
-                    {/* <NavLink to="/"></NavLink> */}
+                    <img
+                        src={KF_logo}
+                        alt="Logo"
+                        className="h-full"
+                        style={{
+                            width: "100px",
+                        }}
+                    />
+                </li>
+
+                {/* Name */}
+                <li>
                     <span>Khawaja Fashi</span>
                 </li>
-                <div className='flex flex-col justify-center items-center relative' style={{top: "7.5rem"}}>
+
+                {/* Links with Folder Icon */}
+                <div
+                    className="flex flex-col justify-center items-center relative  right-12"
+                >
+                    {/* Folder Icon */}
                     <IconContext.Provider value={{ color: "black", size: "2em" }}>
-                        <button className='h-16'>
+                        <motion.button
+                            id="btn"
+                            animate={{
+                                rotate: isRotated ? 180 : 0, // Rotate based on state
+                            }}
+                            transition={{ duration: 0.5 }}
+                            className="h-16 absolute border-none"
+                            style={{
+                                outline: "none",
+                                background: "none"
+                            }}
+                            onClick={handleClick}
+                        >
                             <IoFolderOpen />
-                        </button>
+                        </motion.button>
                     </IconContext.Provider>
+
+                    {/* Links */}
                     <li
-                        className='flex flex-col justify-center items-center'>
-                        <a
-                            className='p-3 text-black'
-                            style={{
-                                transform: "rotate(5deg)"
-                            }}
-                        >Home</a>
-                        <a
-                            className='p-3 text-black'
-                            style={{
-                                transform: "rotate(-12deg)"
-                            }}
-                        >About</a>
-                        <a
-                            className='p-3 text-black'
-                            style={{
-                                transform: "rotate(9deg)"
-                            }}
-                        >Skills</a>
-                        <a
-                            className='p-3 text-black'
-                            style={{
-                                transform: "rotate(-12deg)"
-                            }}
-                        >Projects</a>
-                        <a
-                            className='p-3 text-black'
-                            style={{
-                                transform: "rotate(9deg)"
-                            }}
-                        >Contact</a>
+                        className="flex flex-col justify-center items-center mt-20"
+                        style={{
+                            position: "relative",
+                            visibility: showLinks ? "visible" : "hidden", // Prevent layout shifts
+                        }}
+                    >
+                        <AnimatePresence>
+                            {showLinks &&
+                                links.map((link, index) => (
+                                    <motion.a
+                                        key={link.name}
+                                        className="pr-4 pl-4 pt-2 pb-2 text-black z-10 bg-slate-400 gap-9"
+                                        variants={linkVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
+                                        style={{
+                                            position: "absolute", // Prevent layout shifting
+                                            top: `${index * 50}px`, // Adjust spacing
+                                            borderRadius: "7px",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        {link.name}
+                                    </motion.a>
+                                ))}
+                        </AnimatePresence>
                     </li>
                 </div>
-            </ul>
-        </div>
-    )
-}
+            </ul >
+        </div >
+    );
+};
 
-export default NavBar
+export default NavBar;
