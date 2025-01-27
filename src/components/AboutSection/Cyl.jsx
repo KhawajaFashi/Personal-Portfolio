@@ -1,11 +1,10 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import cylImage from '../../assets/cyl.png'; // Import the image
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
 const Cyl = forwardRef((_, ref) => {
-    // const [rot, setRot] = useState(false);
     const tex = useTexture(cylImage);
 
     // Local ref for the cylinder mesh
@@ -16,7 +15,7 @@ const Cyl = forwardRef((_, ref) => {
         // Rotate the cylinder
         const { mouse } = state; // Access normalized mouse coordinates
         if (meshRef.current) {
-            meshRef.current.rotation.y += delta * 0.4;
+            meshRef.current.rotation.y += delta * 0.3;
             const targetRotationX = -mouse.y * 0.2; // Increase the rotation magnitude
 
             // Adjust interpolation factor to make it slower and smoother

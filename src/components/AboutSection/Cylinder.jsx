@@ -1,4 +1,3 @@
-import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
 import Cyl from './Cyl';
@@ -13,7 +12,7 @@ const Cylinder = () => {
 
                 {/* Lighting */}
                 <ambientLight intensity={0.5} />
-                <directionalLight position={[5, 5, 5]} intensity={0.7} />
+                <directionalLight position={[5, 5, 5]} intensity={1} />
 
                 {/* Cylinder with dynamic rotation */}
                 <Cyl/>
@@ -22,7 +21,7 @@ const Cylinder = () => {
                 <EffectComposer>
                     <Bloom
                         mipmapBlur
-                        intensity={2.5}
+                        intensity={1.5}
                         luminanceThreshold={0}
                         luminanceSmoothing={0}
                     />
