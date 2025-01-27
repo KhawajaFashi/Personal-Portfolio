@@ -34,14 +34,13 @@ const NavBar = () => {
     }
 
     return (
-        <div className="flex justify-start items-start h-24 absolute top-0 left-0 w-full p-4">
-            <ul className="flex justify-between items-center w-full h-full">
+        <div className="p-4 h-8">
+            <ul className="flex justify-between items-center">
                 {/* Logo */}
                 <li>
                     <img
                         src={KF_logo}
                         alt="Logo"
-                        className="h-full"
                         style={{
                             width: "100px",
                         }}
@@ -55,7 +54,7 @@ const NavBar = () => {
 
                 {/* Links with Folder Icon */}
                 <div
-                    className="flex flex-col justify-center items-center relative  right-12"
+                    className="flex flex-col justify-center items-center z-20"
                 >
                     {/* Folder Icon */}
                     <IconContext.Provider value={{ color: "black", size: "2em" }}>
@@ -65,7 +64,7 @@ const NavBar = () => {
                                 rotate: isRotated ? 180 : 0, // Rotate based on state
                             }}
                             transition={{ duration: 0.5 }}
-                            className="h-16 absolute border-none"
+                            className="h-16 border-none"
                             style={{
                                 outline: "none",
                                 background: "none"
@@ -78,7 +77,7 @@ const NavBar = () => {
 
                     {/* Links */}
                     <li
-                        className="flex flex-col justify-center items-center mt-20"
+                        className="flex flex-col justify-center items-center z-20"
                         style={{
                             position: "relative",
                             visibility: showLinks ? "visible" : "hidden", // Prevent layout shifts
@@ -89,7 +88,7 @@ const NavBar = () => {
                                 links.map((link, index) => (
                                     <motion.a
                                         key={link.name}
-                                        className="pr-4 pl-4 pt-2 pb-2 text-black z-10 bg-slate-400 gap-9"
+                                        className="pr-4 pl-4 pt-2 pb-4 gap-9 text-black z-10 bg-slate-400"
                                         variants={linkVariants}
                                         initial="hidden"
                                         animate="visible"

@@ -42,6 +42,46 @@ const LoadingBar = () => {
                 <div style={{ ...styles.progress, width: `${progress}%` }} />
             </div>
         </div>
+        // <>
+        //     {/* Sketchfab Embed */}
+        //     <div className="sketchfab-embed-wrapper" style={styles.iframeContainer}>
+        //         <iframe
+        //             title="GOKU SS ABSOLUTE"
+        //             src="https://sketchfab.com/models/a10d82b854154981ae1d2f6acfdc948d/embed?autostart=1&preload=1&ui_theme=dark"
+        //             allow="autoplay; fullscreen; xr-spatial-tracking"
+        //             allowFullScreen
+        //             style={styles.iframe}
+        //         />
+        //         <p style={styles.sketchfabText}>
+        //             <a
+        //                 href="https://sketchfab.com/3d-models/goku-ss-absolute-a10d82b854154981ae1d2f6acfdc948d?utm_medium=embed&utm_campaign=share-popup&utm_content=a10d82b854154981ae1d2f6acfdc948d"
+        //                 target="_blank"
+        //                 rel="noopener noreferrer"
+        //                 style={styles.sketchfabLink}
+        //             >
+        //                 GOKU SS ABSOLUTE
+        //             </a>{" "}
+        //             by{" "}
+        //             <a
+        //                 href="https://sketchfab.com/artaru0660?utm_medium=embed&utm_campaign=share-popup&utm_content=a10d82b854154981ae1d2f6acfdc948d"
+        //                 target="_blank"
+        //                 rel="noopener noreferrer"
+        //                 style={styles.sketchfabLink}
+        //             >
+        //                 AKIN
+        //             </a>{" "}
+        //             on{" "}
+        //             <a
+        //                 href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=a10d82b854154981ae1d2f6acfdc948d"
+        //                 target="_blank"
+        //                 rel="noopener noreferrer"
+        //                 style={styles.sketchfabLink}
+        //             >
+        //                 Sketchfab
+        //             </a>
+        //         </p>
+        //     </div>
+        // </>
     );
 };
 
