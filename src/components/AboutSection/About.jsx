@@ -1,10 +1,12 @@
 import React from 'react'
 import Cylinder from './Cylinder'
+import HorizontalScroller from './HorizontalScroller'
 
 const About = () => {
     return (
-        <div>
-            <Cylinder/>
+        <div className='relative'>
+            <Cylinder />
+            <HorizontalScroller/>
         </div>
     )
 }

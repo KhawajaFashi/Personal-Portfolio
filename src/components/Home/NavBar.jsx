@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import KF_logo from "../../assets/KF_logo.jpg";
+import KF_logo from "../../assets/KF_logo.png";
 import { IconContext } from "react-icons";
 import { IoFolderOpen } from "react-icons/io5";
 
@@ -16,15 +16,36 @@ const NavBar = () => {
         { name: "Contact" },
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 1 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1, // Delay between animations of each child
+            },
+        },
+        exit: {
+            transition: {
+                staggerChildren: 0.1, // Faster exit animation
+                staggerDirection: -1, // Reverse order on exit
+            },
+        },
+    };
+
     const linkVariants = {
-        hidden: { opacity: 0, y: -50 },
-        visible: () => ({
+        hidden: { opacity: 0, y: -20 },
+        visible: {
             opacity: 1,
             y: 0,
-            transition: { type: "tween", duration: 0.5 },
-        }),
-        exit: { y: -50, opacity: 0, duration: 0.7 }
+            transition: { type: "tween", duration: 0.5, ease: "easeInOut" },
+        },
+        exit: {
+            opacity: 0,
+            y: -20,
+            transition: { type:"tween", duration: 0.5, ease: "easeInOut" },
+        },
     };
+
     let handleClick = function () {
         setIsRotated((prev) => !prev);
         let interval = setTimeout(() => {
@@ -34,7 +55,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="p-4 h-8">
+        <div className="pr-8 pl-8 pt-4 pb-5 h-28 fixed top-0 z-50 w-screen">
             <ul className="flex justify-between items-center">
                 {/* Logo */}
                 <li>
@@ -77,7 +98,7 @@ const NavBar = () => {
 
                     {/* Links */}
                     <li
-                        className="flex flex-col justify-center items-center z-20"
+                        className="flex flex-col justify-center items-center"
                         style={{
                             position: "relative",
                             visibility: showLinks ? "visible" : "hidden", // Prevent layout shifts
@@ -85,24 +106,35 @@ const NavBar = () => {
                     >
                         <AnimatePresence>
                             {showLinks &&
-                                links.map((link, index) => (
-                                    <motion.a
-                                        key={link.name}
-                                        className="pr-4 pl-4 pt-2 pb-4 gap-9 text-black z-10 bg-slate-400"
-                                        variants={linkVariants}
-                                        initial="hidden"
-                                        animate="visible"
-                                        exit="exit"
-                                        style={{
-                                            position: "absolute", // Prevent layout shifting
-                                            top: `${index * 50}px`, // Adjust spacing
-                                            borderRadius: "7px",
-                                            cursor: "pointer"
-                                        }}
-                                    >
-                                        {link.name}
-                                    </motion.a>
-                                ))}
+                                <motion.div
+                                    className="flex flex-col items-center"
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    style={{
+                                        position: "relative",
+                                        visibility: showLinks ? "visible" : "hidden", // Prevent layout shifts
+                                    }}
+                                >
+
+                                    {links.map((link, index) => (
+                                        <motion.a
+                                            key={link.name}
+                                            className="text-white z-10 bg-black w-24 h-8 p-1"
+                                            variants={linkVariants}
+                                            style={{
+                                                position: "absolute", // Prevent layout shifting
+                                                top: `${index * 40}px`, // Adjust spacing
+                                                borderRadius: "40px",
+                                                cursor: "pointer"
+                                            }}
+                                        >
+                                            {link.name}
+                                        </motion.a>
+                                    ))}
+                                </motion.div>
+                            }
                         </AnimatePresence>
                     </li>
                 </div>
