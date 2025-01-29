@@ -42,7 +42,7 @@ const NavBar = () => {
         exit: {
             opacity: 0,
             y: -20,
-            transition: { type:"tween", duration: 0.5, ease: "easeInOut" },
+            transition: { type: "tween", duration: 0.5, ease: "easeInOut" },
         },
     };
 

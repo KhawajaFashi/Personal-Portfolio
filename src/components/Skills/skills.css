@@ -1,7 +1,7 @@
 .skills-container {
     position: relative;
     width: 98.7vw;
-    height: 100vh;
+    height: 92vh;
     text-align: center;
     padding: 20px;
     /* background: #f8f8f8; */
@@ -10,7 +10,7 @@
 .matter-container {
     width: 800px;
     height: 600px;
-    margin: 0 auto;
+    margin: 1rem auto;
     /* border: 2px solid #ddd; */
     overflow: hidden;
 }
