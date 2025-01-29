@@ -55,7 +55,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="pr-8 pl-8 pt-4 pb-5 h-28 fixed top-0 z-50 w-screen">
+        <div className="pr-20 pl-8 pt-4 pb-5 h-28 fixed top-0 z-50 w-screen">
             <ul className="flex justify-between items-center">
                 {/* Logo */}
                 <li>
@@ -107,7 +107,7 @@ const NavBar = () => {
                         <AnimatePresence>
                             {showLinks &&
                                 <motion.div
-                                    className="flex flex-col items-center"
+                                    className="flex flex-col items-center justify-center"
                                     variants={containerVariants}
                                     initial="hidden"
                                     animate="visible"
@@ -121,7 +121,7 @@ const NavBar = () => {
                                     {links.map((link, index) => (
                                         <motion.a
                                             key={link.name}
-                                            className="text-white z-10 bg-black w-24 h-8 p-1"
+                                            className="text-white z-10 bg-black w-24 h-8 p-1 text-center"
                                             variants={linkVariants}
                                             style={{
                                                 position: "absolute", // Prevent layout shifting

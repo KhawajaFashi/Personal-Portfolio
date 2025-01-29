@@ -3,6 +3,7 @@ import Matter from "matter-js";
 import "./Skills.css";
 import img from "../../assets/Skills_img/javascript.svg";
 import SkillsContainer from "./SkillsContainer";
+import imageList from "../../utils/Images";
 
 
 const Skills = () => {
@@ -12,27 +13,20 @@ const Skills = () => {
     const mouseConstraintRef = useRef(null); // Store mouse constraint
     const [selectedBody, setSelectedBody] = useState(null);
     const [techStack, setTechStack] = useState(null);
-    const imageFiles = import.meta.glob('./assets/Skills_img/*.svg');
+    const [ImageCount, setImageCount] = useState(0);
 
-    // Create an array of image paths by dynamically importing them
-    const loadImages = async () => {
-        const imagePaths = await Promise.all(
-            Object.keys(imageFiles).map(key => imageFiles[key]())
-        );
-        console.log(imageFiles, imagePaths);
-        // Assuming you want to set the first image as the logo
-        setTechStack({
-            name: "JavaScript", // Or any other tech name
-            logo: imagePaths[0], // First image path as logo
-            expertise: 85, // 0-100% scale
-            description:
-                "I have been working with JavaScript for over 5 years, building dynamic and interactive web applications. I specialize in front-end frameworks like React and Angular, and I'm comfortable with Node.js for server-side development.",
-        });
+    // console.log(imageList);
+    const TechStack = {
+        name: imageList[0].name, // Or any other tech name
+        logo: imageList[0].path, // First image path as logo
+        expertise: 85, // 0-100% scale
+        description:
+            "I have been working with JavaScript for over 5 years, building dynamic and interactive web applications. I specialize in front-end frameworks like React and Angular, and I'm comfortable with Node.js for server-side development.",
     };
-    loadImages();
+    console.log(imageList[0].path);
     useEffect(() => {
-        if (!techStack || !techStack.logo)
-            return;
+        // if (!techStack || !techStack.logo)
+        //     return;
         // Create the engine and runner
         engineRef.current = Matter.Engine.create();
         runnerRef.current = Matter.Runner.create();
@@ -52,25 +46,26 @@ const Skills = () => {
         });
 
         // Create physics bodies
-        const stack = Matter.Composites.stack(20, 20, 10, 5, 0, 0, (x, y) =>
-            Matter.Bodies.circle(x, y, Matter.Common.random(25, 50), {
+        const stack = Matter.Composites.stack(200, 20, 4, 2, 0, 0, (x, y) =>
+            Matter.Bodies.circle(x, y, 50, {
                 isStatic: false,
                 density: 0.01,
                 friction: 0.1,
                 restitution: 0.8,
                 render: {
                     sprite: {
-                        texture: techStack.logo,
-                        xScale: 2,
-                        yScale: 2
+                        texture: imageList[ImageCount + 3].path,
+                        xScale: 0.8,
+                        yScale: 0.8
                     }
                 }
-            })
+            }),
+            ImageCount < 2 ? setImageCount(ImageCount + 1) : setImageCount(0),
         );
 
         Matter.Composite.add(world, stack);
         Matter.Composite.add(world, [
-            Matter.Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
+            Matter.Bodies.rectangle(400, 580, 800, 50, { isStatic: true }),
             Matter.Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
             Matter.Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
         ]);
@@ -130,7 +125,7 @@ const Skills = () => {
         <div className="skills-container">
             <h2>Skills</h2>
             <div ref={sceneRef} className="matter-container"></div>
-            {selectedBody && <SkillsContainer body={selectedBody} onClose={closeMenu} techData={techStack} />}
+            {selectedBody && <SkillsContainer body={selectedBody} onClose={closeMenu} techData={TechStack} />}
         </div>
     );
 };
