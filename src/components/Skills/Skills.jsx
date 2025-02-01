@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
 import "./Skills.css";
-import img from "../../assets/Skills_img/javascript.svg";
 import SkillsContainer from "./SkillsContainer";
 import imageList from "../../utils/Images";
-
+import axios from "axios";
+import HashLoader from "react-spinners/HashLoader";
 
 const Skills = () => {
     const sceneRef = useRef(null);
@@ -12,29 +12,47 @@ const Skills = () => {
     const runnerRef = useRef(null);
     const mouseConstraintRef = useRef(null); // Store mouse constraint
     const [selectedBody, setSelectedBody] = useState(null);
-    const [techStack, setTechStack] = useState(null);
-    const [ImageCount, setImageCount] = useState(0);
-
-    fetch("http://localhost:5000/api/data")
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error("There was an error:", error);
-        });
-
-    // console.log(imageList);
-    const TechStack = {
-        name: imageList[ImageCount].name, // Or any other tech name
-        logo: imageList[ImageCount].path, // First image path as logo
-        expertise: 85, // 0-100% scale
+    const [loading, setLoading] = useState(false);
+    const [TechStack, setTechStack] = useState({
+        name: imageList[0].name, // Or any other tech name
+        logo: imageList[0].path, // First image path as logo
+        expertise: imageList[0].expertise, // 0-100% scale
         description:
-            "I have been working with JavaScript for over 5 years, building dynamic and interactive web applications. I specialize in front-end frameworks like React and Angular, and I'm comfortable with Node.js for server-side development.",
+            "",
+    })
+    // const [response, setResponse] = useState("");
+
+    const sendMessage = async (message, ImageCount) => {
+        setLoading(true)
+        if (!message) {
+            console.error("Message is empty before sending!");
+            return;
+        }
+
+        console.log("Sending message:", message);
+
+        try {
+            const response = await axios.post("http://127.0.0.1:5000/", { message }, {
+                headers: { "Content-Type": "application/json" }
+            });
+
+            console.log("Response from backend:", response.data.response);
+
+            setTechStack(() => ({
+                name: imageList[ImageCount].name, // Or any other tech name
+                logo: imageList[ImageCount].path, // First image path as logo
+                expertise: imageList[ImageCount].expertise, // 0-100% scale
+                description: response.data.response, // Set new description from backend
+            }));
+            // TechStack.description = response.data.response;
+            setLoading(false)
+        } catch (error) {
+            console.error("Error sending request:", error);
+            TechStack.description = error;
+        }
     };
+
     useEffect(() => {
-        // if (!techStack || !techStack.logo)
-        //     return;
         // Create the engine and runner
         engineRef.current = Matter.Engine.create();
         runnerRef.current = Matter.Runner.create();
@@ -43,8 +61,8 @@ const Skills = () => {
         const world = engine.world;
         engine.positionIterations = 16; // Default is 6, increases accuracy in positioning
         engine.velocityIterations = 16; // Default is 6, improves how forces are applied
-        // engine.constraintIterations = 5;
-
+        engine.constraintIterations = 10; // Default is 2
+        engine.timing.timeScale = 0.7;
         // Set up renderer
         const render = Matter.Render.create({
             element: sceneRef.current,
@@ -59,13 +77,14 @@ const Skills = () => {
         // Create physics bodies
         let imgIndex = 0; // Initialize local counter
 
-        const stack = Matter.Composites.stack(200, 20, 7, 4, 0, 0, (x, y) => {
+        const stack = Matter.Composites.stack(200, 20, 7, 2, 0, 0, (x, y) => {
             const body = Matter.Bodies.circle(x, y, 45, {
                 isStatic: false,
-                density: 0.1,
+                density: 0.001,
                 friction: 0.1,
-                restitution: 0.2,
-                slop: 0,
+                frictionAir: 0.01,
+                frictionStatic: 0.5,
+                restitution: 0,
                 render: {
                     sprite: {
                         texture: imageList[imgIndex].path, // Assign image from list
@@ -74,6 +93,7 @@ const Skills = () => {
                     }
                 }
             });
+
 
             // Update image index
             imgIndex = (imgIndex + 1) % imageList.length; // Loop through images
@@ -86,9 +106,24 @@ const Skills = () => {
 
         Matter.Composite.add(world, stack);
         Matter.Composite.add(world, [
-            Matter.Bodies.rectangle(400, 580, 800, 50, { isStatic: true }),
-            Matter.Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
-            Matter.Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
+            Matter.Bodies.rectangle(400, 580, 800, 200, {
+                isStatic: true,
+                render: {
+                    visible: false
+                },
+            }),
+            Matter.Bodies.rectangle(800, 300, 150, 600, {
+                isStatic: true,
+                render: {
+                    visible: false
+                },
+            }),
+            Matter.Bodies.rectangle(0, 300, 150, 600, {
+                isStatic: true,
+                render: {
+                    visible: false
+                },
+            })
         ]);
 
         // Mouse interaction setup
@@ -99,16 +134,30 @@ const Skills = () => {
         });
 
         Matter.Composite.add(world, mouseConstraintRef.current);
+        Matter.Events.on(mouseConstraintRef.current, 'mousemove', function (event) {
+            //For Matter.Query.point pass "array of bodies" and "mouse position"
+            let foundPhysics = Matter.Query.point(stack.bodies, event.mouse.position);
+            if (foundPhysics[0]) {
+                foundPhysics[0].position = { x: foundPhysics[0].position.x, y: foundPhysics[0].position.y - 5 };
+            }
+        });
+        const element = stack.bodies[0];
+        console.log("element: ", element);
+
+        mouse.element.removeEventListener('wheel', mouse.mousewheel);
 
         // Handle mouse down event
-        Matter.Events.on(mouseConstraintRef.current, "mousedown", (event) => {
+        Matter.Events.on(mouseConstraintRef.current, "mousedown", async (event) => {
             if (!selectedBody) {
                 const mousePosition = event.mouse.position;
                 const clickedBodies = Matter.Query.point(stack.bodies, mousePosition);
                 console.log("Clicked bodies", clickedBodies[0]);
                 if (clickedBodies.length > 0) {
+                    const message = imageList[(clickedBodies[0].id - 2) % imageList.length].name;
+                    await sendMessage(message, (clickedBodies[0].id - 2) % imageList.length);
                     setSelectedBody(clickedBodies[0]); // Open menu
-                    setImageCount((clickedBodies[0].id - 2) % imageList.length);
+                    // setImageCount((clickedBodies[0].id - 2) % imageList.length);
+                    console.log("After Send Message: ", TechStack, "\n Response: ");
                     Matter.Runner.stop(runner); // Pause physics
                 }
             }
@@ -148,7 +197,18 @@ const Skills = () => {
         <div className="skills-container pt-28">
             <h2>Skills</h2>
             <div ref={sceneRef} className="matter-container"></div>
-            {selectedBody && <SkillsContainer body={selectedBody} onClose={closeMenu} techData={TechStack} />}
+            {loading ? (
+                <div className="absolute top-[40%] left-[48%]">
+                    <HashLoader
+                        color="white"
+                        size={100}
+                    />
+                </div>
+            ) : (
+                selectedBody && (
+                    <SkillsContainer onClose={closeMenu} techData={TechStack} />
+                )
+            )}
         </div>
     );
 };

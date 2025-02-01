@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./Skills.css";
 
-const SkillsContainer = ({ body, onClose, techData }) => {
+const SkillsContainer = ({ onClose, techData }) => {
   const { name, logo, expertise, description } = techData;
-
+  console.log(techData, description)
   return (
     <motion.div
       className="overlay"

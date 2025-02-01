@@ -20,12 +20,6 @@ const Meshes = () => {
         // Optional: Log the mesh details to debug any issues
 
     }, [scene, camera]);
-    // useFrame(() => {
-    //     meshRef1.current.rotation.x += 0.0025;
-    //     meshRef1.current.rotation.y += 0.0015;
-    //     meshRef2.current.rotation.x += 0.005;
-    //     meshRef2.current.rotation.y += 0.001;
-    // });
 
     return (
         <>
