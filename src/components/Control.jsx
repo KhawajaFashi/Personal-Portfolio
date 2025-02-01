@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './Home/Home'
 import About from './AboutSection/About'
 import Skills from './Skills/Skills'
+import Project from './ProjectSection/Project'
 
 const Control = () => {
     return (
@@ -9,6 +10,7 @@ const Control = () => {
             <Home />
             <About />
             <Skills />
+            <Project/>
         </div>
     )
 }
