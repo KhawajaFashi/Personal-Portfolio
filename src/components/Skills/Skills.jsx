@@ -138,7 +138,7 @@ const Skills = () => {
             //For Matter.Query.point pass "array of bodies" and "mouse position"
             let foundPhysics = Matter.Query.point(stack.bodies, event.mouse.position);
             if (foundPhysics[0]) {
-                foundPhysics[0].position = { x: foundPhysics[0].position.x, y: foundPhysics[0].position.y - 5 };
+                foundPhysics[0].position = { x: foundPhysics[0].position.x, y: foundPhysics[0].position.y - 2 };
             }
         });
         const element = stack.bodies[0];
@@ -156,7 +156,6 @@ const Skills = () => {
                     const message = imageList[(clickedBodies[0].id - 2) % imageList.length].name;
                     await sendMessage(message, (clickedBodies[0].id - 2) % imageList.length);
                     setSelectedBody(clickedBodies[0]); // Open menu
-                    // setImageCount((clickedBodies[0].id - 2) % imageList.length);
                     console.log("After Send Message: ", TechStack, "\n Response: ");
                     Matter.Runner.stop(runner); // Pause physics
                 }
@@ -195,7 +194,7 @@ const Skills = () => {
 
     return (
         <div className="skills-container pt-28">
-            <h2>Skills</h2>
+            <h2 className="text-6xl mb-10">Skills</h2>
             <div ref={sceneRef} className="matter-container"></div>
             {loading ? (
                 <div className="absolute top-[40%] left-[48%]">

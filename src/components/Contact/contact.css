@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+.Icons-ul button {
+    box-shadow: 1px 1px 4px 2px inset;
+    border-radius: 50%;
+    padding: 1vw;
+    background: rgb(255, 245, 255);
+}
+.button-email:hover{
+    transform: translate(0, 0);
+}

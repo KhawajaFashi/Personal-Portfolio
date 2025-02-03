@@ -5,7 +5,7 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 const Cylinder = () => {
     return (
-        <div className="w-[98.7vw] h-screen bg-black">
+        <div className="w-[98.75vw] h-screen bg-black">
             <Canvas flat camera={{ fov: 30, position: [0, 0, 5] }}>
                 {/* Orbit controls */}
                 {/* <OrbitControls enableZoom={false} enableDamping dampingFactor={0.1} /> */}

@@ -42,22 +42,36 @@ const Project = () => {
                         Projects
                     </motion.div>
                 ) : (
-                    <div className='relative h-[200vh] w-[98.7vw]'>
-                        <motion.div
-                                className="text-base text-white"
-                            style={{
-                                x,
-                             }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1 }}
-                        >
-                            <ProjectViewer />
-                        </motion.div>
+                    <div
+                        style={{
+                            backgroundX,
+                            backgroundImage: `url(${back})`,
+                            backgroundRepeat: 'repeat-x',
+                            backgroundSize: '100% 80%',
+                            backgroundPosition: '0 60%',
+                            backgroundAttachment: 'scroll',
+                        }}
+                    >
+
+                    <motion.div
+                        className="h-[150vh] w-[100vw] z-10"
+                        style={{
+                            x,
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                    >
+                        {/* <div className="w-[100vw]"> */}
+
+                        <ProjectViewer />
+                        {/* </div> */}
+                    </motion.div>
                     </div>
-                )}
-            </div>
-        </div>
+                )
+                }
+            </div >
+        </div >
     );
 };
 

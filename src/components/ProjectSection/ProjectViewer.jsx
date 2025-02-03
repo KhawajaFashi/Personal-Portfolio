@@ -1,17 +1,18 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import ProjectCards from './ProjectCards'
 import Project1 from '../../assets/Video_1.gif'
 import Project2 from '../../assets/Video_2.gif'
 import Project3 from '../../assets/Video_3.gif'
 import Project4 from '../../assets/Video_4.gif'
-
+import back from '../../assets/Projects_back.png'
 const ProjectViewer = () => {
-    let top = [32, 70, 50];
+    let top = [12, 50, 30];
     let increase = [0, 35, 70, 105];
     let left = 12
     console.log(top);
     return (
-
+        
         <div className='sticky flex h-screen items-center'>
             
             <div className='relative w-[90vw]'

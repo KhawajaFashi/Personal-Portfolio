@@ -1,9 +1,10 @@
 .skills-container {
     position: relative;
     width: 98.7vw;
-    height: 92vh;
+    height: 99vh;
     text-align: center;
     padding: 20px;
+    margin-bottom:8rem;
     /* background: #f8f8f8; */
 }
 
