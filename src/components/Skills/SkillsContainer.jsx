@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "./Skills.css";
+import "./skills.css";
 
 const SkillsContainer = ({ onClose, techData }) => {
   const { name, logo, expertise, description } = techData;

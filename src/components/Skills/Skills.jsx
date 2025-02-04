@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
-import "./Skills.css";
+import "./skills.css";
 import SkillsContainer from "./SkillsContainer";
 import imageList from "../../utils/Images";
 import axios from "axios";
