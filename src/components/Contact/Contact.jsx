@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import creativity from '../../assets/creativity.png'
 import slack from '../../assets/slack.png'
-import { FaLinkedin, FaGithub, FaSlack, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaFacebook } from "react-icons/fa";
 import '../Contact/contact.css'
 const Contact = () => {
     const [hoverColor, setHoverColor] = useState({
@@ -35,9 +35,6 @@ const Contact = () => {
 
                         <div className='ml-48 w-[10vw] relative'>
                             <button className='bg-purple-300 p-3 w-[10vw] button-email translate-x-2 translate-y-2' onClick={() => console.log("Button is Clicked")}
-                                style={{
-                                    // transform: 'translate(10px, 7px)'
-                                }}
                             >
                                 Send Email
                             </button>

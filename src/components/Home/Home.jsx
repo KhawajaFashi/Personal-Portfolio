@@ -12,7 +12,6 @@ const Home = () => {
         <div className='h-screen w-[97vw]'>
             <ClothBackground/>
             {/* Navigation Bar */}
-            <NavBar />
 
             {/* Hero Section */}
             <HeroSection />

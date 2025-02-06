@@ -1,19 +1,20 @@
 import React, { useRef } from 'react'
 import ScrollItem from './ScrollItem'
 import FactItem from './FactItem'
-import { useTransform, motion, useScroll } from 'framer-motion';
+import { useTransform, motion, useScroll, useSpring } from 'framer-motion';
 
 const HorizontalScroller = () => {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: targetRef,
     });
-
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-50%"]);
+    const scrollProgress = useSpring(scrollYProgress, { bounce: false });
+    const x = useTransform(scrollProgress, [0, 0.9], ["0%", "-65%"]);
     return (
-        <section ref={targetRef} className='relative h-[200vh] w-[98.7vw]'>
-            <div className='sticky flex top-0 h-screen items-center overflow-hidden'>
-                <motion.div style={{ x }} className='flex relative'>
+        <section ref={targetRef} className='relative h-[200vh]'>
+            <div className='sticky flex top-0 h-screen overflow-hidden'>
+                <motion.div style={{ x, willChange: "transform", }} className='flex'>
+                    <FactItem />
                     <ScrollItem />
                     <FactItem />
                 </motion.div>

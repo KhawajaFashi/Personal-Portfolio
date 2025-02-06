@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import ProjectViewer from "./ProjectViewer";
 import back from '../../assets/Projects_back.png'
 
@@ -11,12 +11,13 @@ const Project = () => {
     const { scrollYProgress } = useScroll({
         target: targetRef,
     });
-    const scale = useTransform(scrollYProgress, [0, 0.3], ["1", "20"]);
+    const scrollProgress = useSpring(scrollYProgress, { bounce: false });
+    const scale = useTransform(scrollProgress, [0, 0.3], ["1", "20"]);
 
     // Opacity effect: Fades out when scrolling
-    const opacity = useTransform(scrollYProgress, [0, 0.3], ["1", "0"]);
-    const x = useTransform(scrollYProgress, [0.35, 1], ["1%", "-175%"]);
-    const backgroundX = useTransform(scrollYProgress, [0.35, 1], ["0%", "200%"]);
+    const opacity = useTransform(scrollProgress, [0, 0.3], ["1", "0"]);
+    const x = useTransform(scrollProgress, [0.35, 1], ["1%", "-175%"]);
+    const backgroundX = useTransform(scrollProgress, [0.35, 1], ["0%", "200%"]);
     const [showNextContent, setShowNextContent] = useState(false);
     useEffect(() => {
         const unsubscribe = scrollYProgress.onChange((value) => {

@@ -4,7 +4,7 @@ import HorizontalScroller from './HorizontalScroller'
 
 const About = () => {
     return (
-        <div className='relative'>
+        <div>
             <Cylinder />
             <HorizontalScroller/>
         </div>

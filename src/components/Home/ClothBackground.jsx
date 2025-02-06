@@ -148,7 +148,7 @@ const ClothBackground = () => {
     }, []);
 
     return <div ref={sceneRef} className="absolute top-0 left-0 w-[98.75vw] h-screen bg-transparent overflow-hidden" id="canva" style={{
-        mixBlendMode: "color-burn",
+        // mixBlendMode: "color-burn",
         opacity: 0.5
     }}
     />;
