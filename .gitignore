@@ -23,4 +23,18 @@ dist-ssr
 *.sln
 *.sw?
 
-api/venv/
+api
+.venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
