@@ -6,6 +6,7 @@ const About = () => {
     return (
         <div>
             <Cylinder />
+            
             <HorizontalScroller/>
         </div>
     )
