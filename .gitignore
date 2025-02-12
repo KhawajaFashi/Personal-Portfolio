@@ -23,14 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-api
-.idea/
-.vscode/
-.venv*/
-venv*/
-__pycache__/
-dist/
-.coverage*
-htmlcov/
-.tox/
-docs/_build/
+api/venv/
