@@ -40,10 +40,6 @@ Abstract:xxx
 ## Main Directory Hierarchy
 ```
 |—— .gitignore
-|—— api
-|    |—— .flaskenv
-|    |—— api.py
-|    |—— venv
 |—— public
 |    |—— vite.svg
 |—— src
