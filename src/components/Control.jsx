@@ -32,8 +32,7 @@ const Control = () => {
                 <div
                     className="fixed top-0 left-0 w-full h-full pointer-events-none z-50"
                     style={{
-                        background: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.97) 80%)`,
-                        transition: "background 0.1s ease-out",
+                        background: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.97) 80%)`,
                     }}
                 ></div>
             )}

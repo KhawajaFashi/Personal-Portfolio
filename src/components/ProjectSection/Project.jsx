@@ -11,13 +11,13 @@ const Project = () => {
     const { scrollYProgress } = useScroll({
         target: targetRef,
     });
-    const scrollProgress = useSpring(scrollYProgress, { bounce: false });
-    const scale = useTransform(scrollProgress, [0, 0.3], ["1", "20"]);
+    // const scrollYProgress = useSpring(scrollYProgress, { bounce: false });
+    const scale = useTransform(scrollYProgress, [0, 0.3], ["1", "20"]);
 
     // Opacity effect: Fades out when scrolling
-    const opacity = useTransform(scrollProgress, [0, 0.3], ["1", "0"]);
-    const x = useTransform(scrollProgress, [0.35, 1], ["1%", "-175%"]);
-    const backgroundX = useTransform(scrollProgress, [0.35, 1], ["0%", "200%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.3], ["1", "0"]);
+    const x = useTransform(scrollYProgress, [0.35, 1], ["1%", "-175%"]);
+    const backgroundX = useTransform(scrollYProgress, [0.35, 1], ["0%", "200%"]);
     const [showNextContent, setShowNextContent] = useState(false);
     useEffect(() => {
         const unsubscribe = scrollYProgress.onChange((value) => {
