@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Strict Editorial Colors */
+  --bg-color: #0D0D0D;
+  --card-bg: #141414;
+  --border-color: #2A2A2A;
+  
+  --primary-accent: #E8C547; /* Muted gold */
+  --secondary-accent: #4A7FA5; /* Steel blue */
+  
+  --text-primary: #F0EDE8; /* Warm off-white */
+  --text-muted: #6B6B6B;
+  --crimson-alert: #C0392B; /* Deep red alert */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-obsidian-bg: var(--bg-color);
+  --color-obsidian-card: var(--card-bg);
+  --color-obsidian-border: var(--border-color);
+  
+  --color-accent-gold: var(--primary-accent);
+  --color-accent-blue: var(--secondary-accent);
+  
+  --color-primary-text: var(--text-primary);
+  --color-muted-text: var(--text-muted);
+  --color-crimson-alert: var(--crimson-alert);
+  
+  --font-serif: var(--font-ibm-plex-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
 }
+
+/* Custom scrollbars matching minimal theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-accent);
+}
+
+/* Editorial Style Elements */
+.section-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sharp Card Design (Bible Principle & Senior Specs) */
+.editorial-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.editorial-card:hover {
+  border-color: var(--primary-accent);
+  box-shadow: 0 2px 8px rgba(232, 197, 71, 0.05);
+}
+
+/* Minimalist Print Inputs */
+.editorial-input {
+  background: #090909;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  transition: all 0.15s ease-out;
+}
+
+.editorial-input:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 4px rgba(232, 197, 71, 0.1);
+}
+
+/* Typographical Buttons */
+.editorial-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-accent);
+  color: #0D0D0D;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 10px 20px;
+  font-family: var(--font-inter), sans-serif;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  border: 1px solid var(--primary-accent);
+}
+
+.editorial-btn-primary:hover {
+  background: transparent;
+  color: var(--primary-accent);
+}
+
+.editorial-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 10px 20px;
+  font-family: var(--font-inter), sans-serif;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+}
+
+.editorial-btn-secondary:hover {
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+}
+
+
