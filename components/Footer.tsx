@@ -1,3 +1,5 @@
+"use client";
+
 const NAV_LINKS = [
   { label: "Selected Works",        href: "#projects"  },
   { label: "Chronicle",            href: "#experience" },
@@ -7,52 +9,25 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
-  const hoverOn = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    (e.currentTarget as HTMLElement).style.color = "#F0EDE8";
-  };
-  const hoverOff = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    (e.currentTarget as HTMLElement).style.color = "#6B6B6B";
-  };
-
   return (
-    <footer style={{ background: "#0D0D0D", overflow: "hidden", position: "relative" }}>
-
+    <footer className="bg-obsidian-bg overflow-hidden relative w-full">
       {/* ── Layer 1: Legal strip (top) ── */}
       <div
-        style={{
-          borderTop: "1px solid #2A2A2A",
-          padding: "20px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontFamily: "var(--font-jetbrains-mono), monospace",
-          fontSize: "11px",
-          color: "#4A4A4A",
-        }}
+        className="border-t border-obsidian-border px-6 md:px-12 py-5 flex flex-col md:flex-row justify-between items-center gap-3 font-mono text-[11px] text-[#4A4A4A]"
       >
         <span>© 2026 Khawaja Fashi ud Din Abdullah · All Rights Reserved</span>
-        <span>Next.js · Tailwind CSS · Framer Motion</span>
+        <span className="text-right">Next.js · Tailwind CSS · Framer Motion</span>
       </div>
 
       {/* ── Layer 2: Nav links spread evenly across full width ── */}
       <div
-        style={{
-          padding: "28px 48px 0",
-          display: "flex",
-          justifyContent: "space-between",
-          fontFamily: "var(--font-inter), system-ui, sans-serif",
-          fontSize: "11px",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-        }}
+        className="px-6 md:px-12 pt-7 pb-4 flex flex-wrap justify-between items-center gap-4 font-sans text-[11px] uppercase tracking-[0.12em]"
       >
         {NAV_LINKS.map(({ label, href }) => (
           <a
             key={label}
             href={href}
-            style={{ color: "#6B6B6B", textDecoration: "none", transition: "color 0.15s" }}
-            onMouseEnter={hoverOn}
-            onMouseLeave={hoverOff}
+            className="text-muted-text hover:text-primary-text transition-colors duration-150 text-decoration-none focus:outline-none focus:text-accent-gold"
           >
             {label}
           </a>
@@ -61,36 +36,14 @@ export default function Footer() {
 
       {/* ── Layer 3: Giant ghost "FASHI" anchored to the bottom edge ── */}
       {/* Overflows left/right; footer overflow:hidden clips it — ArchiGreen technique */}
-      <div
-        style={{
-          position: "relative",
-          height: "clamp(200px, 30vw, 375px)",
-          marginTop: "8px",
-          marginBottom: "2rem",
-        }}
-      >
+      <div className="relative h-[200px] sm:h-[260px] md:h-[300px] lg:h-[375px] mt-2 mb-8 pointer-events-none select-none">
         <div
           aria-hidden="true"
-          style={{
-            position: "absolute",
-            bottom: "-0.18em",
-            left: "50%",
-            transform: "translateX(-50%)",
-            whiteSpace: "nowrap",
-            fontFamily: "var(--font-ibm-plex-serif), Georgia, serif",
-            fontSize: "clamp(200px, 30vw, 540px)",
-            fontWeight: 700,
-            color: "#1C1C1C",
-            letterSpacing: "-0.02em",
-            lineHeight: 1,
-            userSelect: "none",
-            pointerEvents: "none",
-          }}
+          className="absolute bottom-[-0.18em] left-1/2 -translate-x-1/2 whitespace-nowrap font-serif text-[clamp(120px,25vw,480px)] font-bold text-[#1C1C1C] tracking-[-0.02em] leading-none"
         >
           FASHI
         </div>
       </div>
-
     </footer>
   );
 }

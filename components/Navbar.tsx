@@ -28,11 +28,11 @@ export default function Navbar({ scrollProgress }: NavbarProps) {
           </div>
 
           {/* Nav: 13px Inter, tracking 0.12em, 70% opacity → 100% on hover */}
-          <nav className="flex items-center gap-6 font-sans text-[13px]" style={{ letterSpacing: "0.12em" }}>
-            <a href="#projects" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase">Selected Works</a>
-            <a href="#experience" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase">Chronicle</a>
-            <a href="#about" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase">Biography</a>
-            <a href="#contact" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase">Connect</a>
+          <nav className="flex items-center flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2 font-sans text-[13px]" style={{ letterSpacing: "0.12em" }}>
+            <a href="#projects" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase outline-none focus-visible:text-accent-gold">Selected Works</a>
+            <a href="#experience" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase outline-none focus-visible:text-accent-gold">Chronicle</a>
+            <a href="#about" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase outline-none focus-visible:text-accent-gold">Biography</a>
+            <a href="#contact" className="text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-colors uppercase outline-none focus-visible:text-accent-gold">Connect</a>
           </nav>
         </div>
       </header>
